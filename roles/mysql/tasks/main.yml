@@ -11,7 +11,7 @@
  
 - name: Start MariaDB
   service:
-            name: mariadb.service
+            name: mysqld
             state: started
             enabled: yes
 

@@ -1,14 +1,14 @@
 - hosts: webservers
   vars:
-          - user_name: "ansibl"
+          - user_name: "root"
           - user_shell: "/bin/bash"
           - user_group: "wheel"
           - mysql_root_password: "password"
           - dowload_url: "https://wordpress.org/latest.tar.gz"
           - name_site_config: "default.conf"
           - db_name: "wordpress"
-          - db_user: "wordpress"
-          - db_password: "wordpress"
+          - db_user: "wordpressuser"
+          - db_password: "wordpresspassword!"
           - wpdirectory: "/var/www/html/"
 
   roles:
