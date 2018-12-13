@@ -1,0 +1,42 @@
+- name: Creating database
+  mysql_db:
+            name: "{{ db_name }}"
+            state: "present"
+            login_user: "root"
+            login_password: "{{ mysql_root_password }}"
+
+- name: Creating database user
+  mysql_user:
+              name: "{{ db_user }}"
+              password: "{{ db_password }}"
+              priv: "{{ db_name }}.*:ALL"
+              state: "present"
+              login_user: "root"
+              login_password: "{{ mysql_root_password }}"
+
+- name: dowload Wordpress
+  get_url:
+           url: "{{ dowload_url }}"
+           dest: "~/latest.tar.gz"
+
+- name: creating directory for WordPress
+  file:
+        path: "{{ wpdirectory }}"
+        state: "directory"
+        owner: "apache"
+        group: "apache"
+
+- name: unpack WordPress installation
+  shell: "tar xvfz ~/latest.tar.gz"
+
+- name: Rsync wordpress
+  shell: "rsync -avP ~/wordpress/ {{wpdirectory}}"
+
+- name: Install Wordpress configuration
+  template:
+            src: wp-config.php
+            dest: "{{ wpdirectory }}"
+
+- name: Chown Wordpress
+  shell: "chown -R apache:apache {{ wpdirectory }}"
+

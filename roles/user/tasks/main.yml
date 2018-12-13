@@ -1,0 +1,12 @@
+- name: Install sudo
+  yum:
+       name: sudo
+       state: latest
+
+- name: Add user
+  user:
+        name: "{{ user_name }}"
+#        password: "{{ path_key }}"
+        shell: "{{ user_shell }}"
+        groups: "{{ user_group }}"
+        append: yes

@@ -1,0 +1,4 @@
+---
+- name: mysql start
+  service: name=mariadb state=started
+

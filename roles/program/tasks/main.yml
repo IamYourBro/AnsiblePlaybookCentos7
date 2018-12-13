@@ -1,0 +1,16 @@
+- name:  Install programs
+  yum:
+       name={{ item }} state=latest #update_cache=yes
+  with_items:
+              - mc
+              - nano
+              - tree
+              - curl
+              - wget
+              - rsync
+              - zip
+              - bash-completion
+              - git
+              - epel-release
+              - net-tools.x86_64
+              - bind-utils

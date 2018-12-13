@@ -1,0 +1,25 @@
+---
+
+- name: Install MySql
+  yum:
+       name={{ item }} state=latest update_cache=yes
+  with_items:
+              - mariadb
+              - mariadb-server
+              - net-tools
+              - MySQL-python
+ 
+- name: Start MariaDB
+  service:
+            name: mariadb.service
+            state: started
+            enabled: yes
+
+- name: Change root password
+  mysql_user:
+              user: root
+              password: "{{ mysql_root_password }}"
+              state: present
+
+  ignore_errors: yes
+
